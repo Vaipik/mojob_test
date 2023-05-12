@@ -1,0 +1,24 @@
+# Python: Byte code
+__pycache__/
+
+# Python: Packaging
+build/
+dist/
+*.egg-info
+
+
+*.db
+.env
+/venv
+/.venv
+*.json
+# IDE's
+.idea
+.vscode
+/.venv/
+/.python-version
+/tools/deploy/temp/
+
+.space
+Spacefile
+requirements.txt
