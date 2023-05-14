@@ -51,23 +51,26 @@ class JobSerializer(serializers.ModelSerializer):
         Overriding create method to create objects with nested serializers
         :param validated_data: valid data
         :param job_email: JobEmai instance, Dependency Injection.
-        :return: Job
+        :return: created job instance
         """
         header_data = validated_data.pop("header")  # None is not required because of validation
-        if header_data is None:
-            raise serializers.ValidationError(
-                detail={"detail": "Job header data was not provided"},
-                code=status.HTTP_400_BAD_REQUEST
-            )
+
         job = Job.objects.create(
             name=validated_data["name"],
             type=validated_data["type"]
         )
-        job_email.send_job_created_mail(job_id=job.id)
         JobHeader.objects.create(**header_data, job=job)
+        job_email.send_job_created_mail(job_id=job.id)
         return job
 
-    def update(self, instance: Job, validated_data: dict, job_email: JobEmail = JobEmail()):
+    def update(self, instance: Job, validated_data: dict, job_email: JobEmail = JobEmail()) -> Job:
+        """
+        Overriding create method to create objects with nested serializers
+        :param instance: Job instance to be updated
+        :param validated_data: valid data
+        :param job_email: JobEmai instance, Dependency Injection.
+        :return: updated job instance
+        """
         header_data = validated_data.pop("header")
         header = instance.header
 
