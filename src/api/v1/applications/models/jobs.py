@@ -26,6 +26,11 @@ class Job(models.Model):
 
     class Meta:
         db_table = "jobs"
+        verbose_name = "Job"
+        verbose_name_plural = "Jobs"
+
+    def __str__(self) -> str:
+        return f"{self.id} | {self.type} | {self.name}"
 
 
 class JobHeader(models.Model):
@@ -44,3 +49,8 @@ class JobHeader(models.Model):
 
     class Meta:
         db_table = "job_headers"
+        verbose_name = "Job header"
+        verbose_name_plural = "Job headers"
+
+    def __str__(self) -> str:
+        return f"{self.id} | {self.rich_title_text}, {self.job.name}"
