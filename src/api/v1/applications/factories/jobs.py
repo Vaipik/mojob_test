@@ -4,8 +4,8 @@ from ..models import Job, JobHeader
 
 
 class JobFactory(factory.django.DjangoModelFactory):
-    name = factory.fuzzy.FuzzyText
-    type = factory.fuzzy.FuzzyChoice(Job.JobTypeChoices.choices)
+    name = factory.fuzzy.FuzzyText()
+    type = factory.fuzzy.FuzzyChoice(Job.JobTypeChoices.values)
 
     class Meta:
         model = Job

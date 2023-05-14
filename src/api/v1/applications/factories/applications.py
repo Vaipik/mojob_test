@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 import factory.fuzzy
 
 from ..models import Application
-from .jobs import JobFactory
+from ..factories.jobs import JobFactory
 
 
 User = get_user_model()
