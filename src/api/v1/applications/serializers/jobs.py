@@ -1,7 +1,7 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers, status
 
-from src.utils.jobs import JobEmail
+from utils.jobs import JobEmail
 from ..models import Job, JobHeader
 
 
