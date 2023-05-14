@@ -1,6 +1,7 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers, status
 
+from src.utils.jobs import JobEmail
 from ..models import Job, JobHeader
 
 
@@ -45,8 +46,14 @@ class JobSerializer(serializers.ModelSerializer):
         model = Job
         fields = ["id", "name", "type", "header"]
 
-    def create(self, validated_data: dict):
-        header_data = validated_data.pop("header", None)
+    def create(self, validated_data: dict, job_email: JobEmail = JobEmail()) -> Job:
+        """
+        Overriding create method to create objects with nested serializers
+        :param validated_data: valid data
+        :param job_email: JobEmai instance, Dependency Injection.
+        :return: Job
+        """
+        header_data = validated_data.pop("header")  # None is not required because of validation
         if header_data is None:
             raise serializers.ValidationError(
                 detail={"detail": "Job header data was not provided"},
@@ -56,6 +63,33 @@ class JobSerializer(serializers.ModelSerializer):
             name=validated_data["name"],
             type=validated_data["type"]
         )
-
+        job_email.send_job_created_mail(job_id=job.id)
         JobHeader.objects.create(**header_data, job=job)
         return job
+
+    def update(self, instance: Job, validated_data: dict, job_email: JobEmail = JobEmail()):
+        header_data = validated_data.pop("header")
+        header = instance.header
+
+        for key in validated_data:  # Valid data without header
+            setattr(
+                instance,
+                key,
+                validated_data.get(key)
+            )
+        instance.save()
+        old_header_rich_text = instance.header.rich_title_text
+        for key in header_data:  # Job header valid data
+            setattr(
+                header,
+                key,
+                header_data.get(key, getattr(header, key))
+            )
+        header.save()
+
+        job_email.send_job_updated_mail(
+            job_id=instance.id,
+            old_title_rich_text=old_header_rich_text,
+            new_title_rich_text=header.rich_title_text
+        )
+        return instance
