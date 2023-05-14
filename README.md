@@ -59,17 +59,17 @@ ___
 
 Some picture to see how it works: \
 The response from endpoint `/api/v1/jobs/` if user is authorized
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/jobs_get_list_auth.png" width="640"/>
+<img height="320" src="docs/img/jobs_get_list_auth.png" width="640"/>
 The response from endpoint `/api/v1/jobs/` if user is unauthorized
 All further examples will be for authorized user
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/jobs_get_unauth.png" width="640"/>
+<img height="320" src="docs/img/jobs_get_unauth.png" width="640"/>
 The response from endpoint `/api/v1/jobs/` for `POST` method.
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/jobs_post.png" width="640"/>
+<img height="320" src="docs/img/jobs_post.png" width="640"/>
 The response from endpoint `/api/v1/jobs/` for `POST` method with wrong `job type`
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/jobs_post_with_wrong_type.png" width="640"/>
+<img height="320" src="docs/img/jobs_post_with_wrong_type.png" width="640"/>
 The response from endpoint `/api/v1/jobs/{uuid}` for `PUT` method.
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/jobs_put.png" width="640"/>
+<img height="320" src="docs/img/jobs_put.png" width="640"/>
 The response from endpoint `/api/v1/jobs/{uuid}` for `DELETE` method.
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/jobs_delete.png" width="640"/>
+<img height="320" src="docs/img/jobs_delete.png" width="640"/>
 The response from endpoint `/api/v1/users/{id}/applications/` for `GET` method.
-<img height="320" src="/home/nkhylko/IT/TEST_TASKS/Mojob_test/docs/img/applications_get_list.png" width="640"/>
+<img height="320" src="docs/img/applications_get_list.png" width="640"/>
